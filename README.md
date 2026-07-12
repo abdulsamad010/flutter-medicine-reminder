@@ -1,17 +1,52 @@
-# medicine_reminder
+# Medicine Reminder
 
-A new Flutter project.
+A Flutter medicine reminder application for managing scheduled medications with offline data persistence and recurring local notifications.
 
-## Getting Started
+The application allows users to create medicine reminders for themselves or people they care for, store reminder information locally, and receive notifications at scheduled medicine times without requiring an internet connection or user account.
 
-This project is a starting point for a Flutter application.
+## Planned Features
 
-A few resources to get you started if this is your first Flutter project:
+- Add medicine reminders
+- View saved medicine reminders
+- Edit medicine reminders
+- Delete medicine reminders
+- Assign medicines to a person
+- Store medicine data locally using SQLite
+- Manage application state using Provider and ChangeNotifier
+- Schedule recurring daily local notifications
+- Update notifications when medicine reminders are edited
+- Cancel notifications when medicine reminders are deleted
+- Form validation
+- Loading and empty states
+- Clean Material 3 user interface
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Dart
+- Provider
+- ChangeNotifier
+- SQLite
+- sqflite
+- flutter_local_notifications
+- timezone
+- Material 3
+
+## Project Structure
+
+```text
+lib/
+├── main.dart
+├── models/
+│   └── medicine.dart
+├── providers/
+│   └── medicine_provider.dart
+├── database/
+│   └── database_helper.dart
+├── services/
+│   └── notification_service.dart
+├── screens/
+│   ├── home_screen.dart
+│   └── medicine_form_screen.dart
+└── widgets/
+    └── medicine_card.dart
