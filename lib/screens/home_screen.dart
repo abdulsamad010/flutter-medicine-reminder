@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/medicine_provider.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<MedicineProvider>().loadMedicine();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Medicine Reminder')),
+      body: Consumer<MedicineProvider>(
+          builder: (context,provider,child) {
+            if (provider.isLoading == true) {
+              return CircularProgressIndicator();
+            }
+            if(provider.medicines.isEmpty){
+              return Text("No medicine added yet");
+            }
+
+            return ListView.builder(
+              itemCount: provider.medicines.length,
+              itemBuilder: (context,index){
+                return Card(
+                  child: ListTile(
+                    title: Text(provider.medicines[index].name),
+                    subtitle: Text(
+                      '${provider.medicines[index].personName}\n'
+                          '${provider.medicines[index].dosage}\n'
+                          '${provider.medicines[index].reminderTime}',
+                    ),
+                  ),
+                );
+              },
+            );
+
+          }));
+  }
+}
