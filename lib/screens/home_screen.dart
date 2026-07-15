@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/medicine_provider.dart';
+import 'medicine_form_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  bool edit=false;
 
   @override
   void initState() {
@@ -22,7 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Medicine Reminder')),
+      appBar: AppBar(title: Text('Medicine Reminder'),
+        actions: [
+          ElevatedButton(onPressed: (){
+            edit=false;
+            Navigator.push(context,MaterialPageRoute(builder: (context)=>MedicineFormScreen(Edit: edit, Index: null)));
+          }, child: Text("Add New Medicine"))
+        ],
+      ),
       body: Consumer<MedicineProvider>(
           builder: (context,provider,child) {
             if (provider.isLoading == true) {
@@ -43,8 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           '${provider.medicines[index].dosage}\n'
                           '${provider.medicines[index].reminderTime}',
                     ),
+                    trailing: IconButton(onPressed: (){
+                      edit=true;
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MedicineFormScreen(Edit:edit, Index:index)));
+                    }, icon: Icon(Icons.edit),
                   ),
-                );
+                ));
               },
             );
 
