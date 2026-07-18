@@ -35,8 +35,8 @@ class MedicineProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> deleteMedicine(int id) async{
-    await db.deleteMedicine(id);
+  Future<void> deleteMedicine(int? id) async{
+    await db.deleteMedicine(id!);
     for (int i = 0; i < medicines.length; i++) {
       if (medicines[i].id == id) {
         medicines.removeAt(i);

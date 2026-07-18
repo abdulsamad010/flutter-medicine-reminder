@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/medicine_provider.dart';
+import '../widgets/medicine_card.dart';
 import 'medicine_form_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,43 +26,31 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Medicine Reminder'),
-        actions: [
-          ElevatedButton(onPressed: (){
-            edit=false;
-            Navigator.push(context,MaterialPageRoute(builder: (context)=>MedicineFormScreen(Edit: edit, Index: null)));
-          }, child: Text("Add New Medicine"))
-        ],
-      ),
-      body: Consumer<MedicineProvider>(
-          builder: (context,provider,child) {
-            if (provider.isLoading == true) {
-              return CircularProgressIndicator();
-            }
-            if(provider.medicines.isEmpty){
-              return Text("No medicine added yet");
-            }
+        appBar: AppBar(title: Text('Medicine Reminder')),
 
-            return ListView.builder(
-              itemCount: provider.medicines.length,
-              itemBuilder: (context,index){
-                return Card(
-                  child: ListTile(
-                    title: Text(provider.medicines[index].name),
-                    subtitle: Text(
-                      '${provider.medicines[index].personName}\n'
-                          '${provider.medicines[index].dosage}\n'
-                          '${provider.medicines[index].reminderTime}',
-                    ),
-                    trailing: IconButton(onPressed: (){
-                      edit=true;
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MedicineFormScreen(Edit:edit, Index:index)));
-                    }, icon: Icon(Icons.edit),
-                  ),
-                ));
-              },
-            );
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          edit=false;
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>MedicineFormScreen(Edit: edit, Index: null)));
+        },child: Icon(Icons.add)),
 
-          }));
+        body: Consumer<MedicineProvider>(
+            builder: (context,provider,child) {
+              if (provider.isLoading == true) {
+                return CircularProgressIndicator();
+              }
+              if(provider.medicines.isEmpty){
+                return Text("No medicine added yet");
+              }
+
+              return ListView.builder(
+                itemCount: provider.medicines.length,
+                itemBuilder: (context,index){
+                  return MedicineCard(medicines: provider.medicines, index:index, edit:edit);
+                },
+              );
+
+            }
+        )
+    );
   }
 }

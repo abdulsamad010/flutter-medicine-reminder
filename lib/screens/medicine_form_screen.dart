@@ -145,7 +145,7 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
                   context.read<MedicineProvider>().addMedicine(medicine);
                 }
 
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                Navigator.pop(context);
                 }}, child: Text("Submit"))
 
             ],
