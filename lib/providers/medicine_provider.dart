@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:medicine_reminder/models/medicine.dart';
+import 'package:medicine_reminder/services/notification_service.dart';
 
 import '../database/database_helper.dart';
 
@@ -8,6 +9,7 @@ class MedicineProvider extends ChangeNotifier{
   List<Medicine> medicines=[];
   bool isLoading=false;
   DatabaseHelper db=DatabaseHelper();
+  NotificationService nS=NotificationService();
 
   Future<void> loadMedicine() async{
     isLoading=true;
@@ -20,6 +22,13 @@ class MedicineProvider extends ChangeNotifier{
     final id=await db.insertMedicine(medicine);
     medicine.id=id;
     medicines.add(medicine);
+
+    await nS.scheduleMedicineNotification(
+      id: medicine.id!,
+      medicineName: medicine.name,
+      reminderTime: medicine.reminderTime,
+    );
+
     notifyListeners();
   }
 
@@ -32,6 +41,15 @@ class MedicineProvider extends ChangeNotifier{
         break;
       }
     }
+
+    await nS.cancelNotification(medicine.id!);
+
+    await nS.scheduleMedicineNotification(
+      id: medicine.id!,
+      medicineName: medicine.name,
+      reminderTime: medicine.reminderTime,
+    );
+
     notifyListeners();
   }
 
@@ -43,6 +61,9 @@ class MedicineProvider extends ChangeNotifier{
         break;
       }
     }
+
+    await nS.cancelNotification(id);
+
     notifyListeners();
   }
 }

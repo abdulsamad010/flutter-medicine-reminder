@@ -6,7 +6,10 @@ import 'package:provider/provider.dart';
 
 void main() async {
 
+    NotificationService nS=NotificationService();
+    WidgetsFlutterBinding.ensureInitialized();
 
+    await nS.initialize();
   runApp(
     ChangeNotifierProvider(
       create: (context){
