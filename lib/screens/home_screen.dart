@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/medicine_provider.dart';
 import '../widgets/medicine_card.dart';
+import 'about_app.dart';
 import 'medicine_form_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -63,8 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
+        onTap: (int index){
+          if(index==1){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutApp()));
+          }
+        },
         items: [
-
         BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.blue,),label: "Home"),
         BottomNavigationBarItem(label:"About",icon: Icon(Icons.medical_information_rounded,color: Colors.blue,))
       ],),
