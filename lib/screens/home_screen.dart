@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/medicine_provider.dart';
-import '../services/notification_service.dart';
 import '../widgets/medicine_card.dart';
 import 'medicine_form_screen.dart';
 
@@ -60,7 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
               );
 
             }
-        )
+        ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        items: [
+
+        BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.blue,),label: "Home"),
+        BottomNavigationBarItem(label:"About",icon: Icon(Icons.medical_information_rounded,color: Colors.blue,))
+      ],),
     );
   }
 }
