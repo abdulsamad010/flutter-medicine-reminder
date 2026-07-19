@@ -91,8 +91,10 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
               SizedBox(height: 8,),
 
               TextFormField(
+                style: Theme.of(context).textTheme.bodySmall,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
+                  fillColor: Colors.black,
                   icon: Icon(Icons.medication,color: Colors.blue,),
                   label: Text("Medicine Name",style: Theme.of(context).textTheme.bodyMedium),
                 ),
@@ -102,6 +104,7 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
               ),
               SizedBox(height: 8,),
               TextFormField(
+                style: Theme.of(context).textTheme.bodySmall,
                 controller: personNameCont,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -113,6 +116,7 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
               ),
               SizedBox(height: 8,),
               TextFormField(
+                style: Theme.of(context).textTheme.bodySmall,
                 controller: dosageCont,
                 decoration:InputDecoration(
                   border: OutlineInputBorder(),
@@ -125,6 +129,7 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
               ),
               SizedBox(height: 8,),
               TextFormField(
+                style: Theme.of(context).textTheme.bodySmall,
                 controller: reminderTimeCont,
                 decoration:InputDecoration(
                   icon: Icon(Icons.watch_later,color: Colors.blue,),

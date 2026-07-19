@@ -37,10 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Consumer<MedicineProvider>(
             builder: (context,provider,child) {
               if (provider.isLoading == true) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
               if(provider.medicines.isEmpty){
-                return Text("No medicine added yet");
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Center(child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(child: Text("Empty!! Please First Add a New Medicine By Clicking")),
+                      Icon(Icons.add,size: 55,)
+                    ],
+                  )),
+                );
               }
 
               return ListView.builder(
