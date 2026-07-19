@@ -34,7 +34,7 @@ class MedicineProvider extends ChangeNotifier{
 
   Future<void> updateMedicine(Medicine medicine) async{
     await db.updateMedicine(medicine);
-    medicines.add(medicine);
+
     for(int i=0;i<medicines.length;i++){
       if(medicines[i].id==medicine.id){
         medicines[i]=medicine;
