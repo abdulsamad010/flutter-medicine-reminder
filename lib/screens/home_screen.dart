@@ -27,12 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Medicine Reminder')),
+        appBar: AppBar(title: Center(child: Text('Medicine Reminder', style: Theme.of(context).textTheme.bodyLarge,)),backgroundColor: Colors.blue,),
 
         floatingActionButton: FloatingActionButton(onPressed: (){
           edit=false;
           Navigator.push(context,MaterialPageRoute(builder: (context)=>MedicineFormScreen(Edit: edit, Index: null)));
-        },child: Icon(Icons.add)),
+        },child: Icon(Icons.add,color: Colors.white,),backgroundColor: Colors.blue,),
 
         body: Consumer<MedicineProvider>(
             builder: (context,provider,child) {

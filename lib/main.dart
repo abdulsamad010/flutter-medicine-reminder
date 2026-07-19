@@ -30,7 +30,35 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home:HomeScreen(),
+      theme: ThemeData(
+        useMaterial3: true,
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+          size: 24
+        ),
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyMedium: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          bodySmall: TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+          )
+        ),
 
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+          )
+        )
+      ),
     );
   }
 }

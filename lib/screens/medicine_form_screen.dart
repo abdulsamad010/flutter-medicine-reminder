@@ -74,48 +74,61 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
       titleText="Edit Existing Medicine";
     }
     return Scaffold(
-      appBar: AppBar(title:Text(titleText),
+      appBar: AppBar(iconTheme: IconThemeData(
+        color: Colors.white
+      ),title:Text(titleText,style: Theme.of(context).textTheme.bodyLarge,),backgroundColor: Colors.blue,
         ),
       body:Form(
         key: fk,
           child: ListView(
+
+            padding: EdgeInsets.all(8),
             children: [
 
               if(widget.Edit==true)
-                Text("Edit Medicine for ID: ${context.read<MedicineProvider>().medicines[widget.Index].id}"),
+                Center(child: Text("Edit Medicine for ID: ${context.read<MedicineProvider>().medicines[widget.Index].id}",)),
+
+              SizedBox(height: 8,),
 
               TextFormField(
                 decoration: InputDecoration(
-                  label: Text("Name"),
+                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.medication,color: Colors.blue,),
+                  label: Text("Medicine Name",style: Theme.of(context).textTheme.bodyMedium),
                 ),
                 controller: nameCont,
                 validator: nameVal,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
-
+              SizedBox(height: 8,),
               TextFormField(
                 controller: personNameCont,
-                decoration: const InputDecoration(
-                  labelText: "Person Name",
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.person_outlined,color: Colors.blue,),
+                  label: Text("Person Name",style: Theme.of(context).textTheme.bodyMedium),
                 ),
                 validator: personNameVal,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
-
+              SizedBox(height: 8,),
               TextFormField(
                 controller: dosageCont,
-                decoration: const InputDecoration(
-                  labelText: "Dosage",
-                  hintText: "e.g. 1 Tablet, 5 ml"
+                decoration:InputDecoration(
+                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.medication_liquid,color: Colors.blue,),
+                  label: Text("Dosage",style: Theme.of(context).textTheme.bodyMedium),
+                  hint: Text("e.g. 1 Tablet, 5 ml",style: Theme.of(context).textTheme.bodySmall),
                 ),
                 validator: dosageVal,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
               ),
-
+              SizedBox(height: 8,),
               TextFormField(
                 controller: reminderTimeCont,
-                decoration: const InputDecoration(
-                  labelText: "Reminder Time",
+                decoration:InputDecoration(
+                  icon: Icon(Icons.watch_later,color: Colors.blue,),
+                  label: Text("Daily Reminder Time",style: Theme.of(context).textTheme.bodyMedium),
                 ),
                   readOnly: true,
                 onTap: () async{
@@ -130,7 +143,7 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
               ),
 
 
-
+              SizedBox(height: 8,),
               ElevatedButton(onPressed: (){
                 if(fk.currentState!.validate()){
                 medicine.name=nameCont.text;
@@ -146,7 +159,7 @@ class _MedicineFormScreenState extends State<MedicineFormScreen> {
                 }
 
                 Navigator.pop(context);
-                }}, child: Text("Submit"))
+                }}, child: Text("Submit",style: TextStyle(color: Colors.white,fontSize: 20)),)
 
             ],
 

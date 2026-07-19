@@ -13,68 +13,103 @@ class MedicineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Row(
-          children: [
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+          child: Row(
+            children: [
 
-            Container(
-              decoration: BoxDecoration(
-              ),
-              child: Icon(Icons.medical_services_outlined,
-              ),
-            ),
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Icon(Icons.medical_services_outlined, color: Colors.red, size: 35, ),
+               ),
 
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(child: Text(medicines[index].name,style: Theme.of(context).textTheme.bodyMedium,)),
+
+
+                        Icon(Icons.notifications_active,color: Colors.amberAccent),
+
+                        Text('${medicines[index].reminderTime}',style: Theme.of(context).textTheme.bodySmall),
+
+
+
+                      ],
+                    ),
+
+                    Divider(thickness: 2,color: Colors.black,),
+
+                    Row(
+                      children: [
+
+                        Column(children: [
+                          Icon(Icons.person_outlined),
+                          SizedBox(height: 16,),
+                          Icon(Icons.medication_liquid),
+                          SizedBox(height: 16,),
+                          Icon(Icons.date_range),
+
+                        ],),
+
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+
+                                Text(
+                                    '${medicines[index].personName}'
+                                ,style: Theme.of(context).textTheme.bodySmall,),
+
+                                SizedBox(height: 8,),
+
+                                Text(
+                                      '${medicines[index].dosage}'
+                                  ,style: Theme.of(context).textTheme.bodySmall,),
+                                SizedBox(height: 8,),
+
+                                Text(
+                                      '${medicines[index].createdAt.substring(0,10)}'
+                                  ,style: Theme.of(context).textTheme.bodySmall,),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              Column(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(medicines[index].name),
-              
-                      SizedBox(width: 55,),
-              
-                      Icon(Icons.notifications_active,color: Colors.amberAccent),
-              
-                      Text('${medicines[index].reminderTime}'),
-              
-              
-              
-                    ],
-                  ),
-              
-                  Divider(thickness: 2,color: Colors.black,),
-              
-                  Text(
-                      'Person Name: ${medicines[index].personName}\n'
-                          'Dosage: ${medicines[index].dosage}\n'
-                          'Created At: ${medicines[index].createdAt.substring(0,10)}\n'
+                  IconButton(onPressed: (){
+                    context.read<MedicineProvider>().deleteMedicine(medicines[index].id);
+                  },icon:Icon(Icons.delete, color: Colors.red,)),
+
+
+                  IconButton(onPressed: (){
+                    edit=true;
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MedicineFormScreen(Edit:edit, Index:index)));
+                  }, icon: Icon(Icons.edit),
                   ),
                 ],
               ),
-            ),
-
-            Column(
-              children: [
-                IconButton(onPressed: (){
-                  context.read<MedicineProvider>().deleteMedicine(medicines[index].id);
-                },icon:Icon(Icons.delete)),
-
-
-                IconButton(onPressed: (){
-                  edit=true;
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => MedicineFormScreen(Edit:edit, Index:index)));
-                }, icon: Icon(Icons.edit),
-                ),
-              ],
-            ),
 
 
 
 
 
-    ]),);
+      ]),),
+    );
 
 
 
